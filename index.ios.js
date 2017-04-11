@@ -1,53 +1,69 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+/*
+    Power, a wake on LAN mobile application.
+    Copyright (C) 2017  Scott Bouloutian
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import { AppRegistry, AppState } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { createLogger } from 'redux-logger';
+import thunk from 'redux-thunk';
+import reduxPromiseMiddleware from 'redux-promise-middleware';
+import reducer from './src/reducers';
+import Application from './src/containers/Application';
 
-export default class power extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
-    );
-  }
+const development = global.__DEV__;
+
+// Create and compose the middlewares
+const logger = createLogger();
+const middlewares = [
+    thunk,
+    reduxPromiseMiddleware(),
+];
+if (development) {
+    middlewares.push(logger);
+}
+const store = compose(applyMiddleware(...middlewares))(createStore)(reducer);
+
+// Create the main app component
+class Power extends Component {
+    constructor() {
+        super();
+        this.handleAppStateChange = appState => store.dispatch({
+            type: 'APP_STATE_CHANGE',
+            appState,
+        });
+    }
+
+    componentDidMount() {
+        AppState.addEventListener('change', this.handleAppStateChange);
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this.handleAppStateChange);
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <Application />
+            </Provider>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-
-AppRegistry.registerComponent('power', () => power);
+AppRegistry.registerComponent('power', () => Power);

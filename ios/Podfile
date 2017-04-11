@@ -1,0 +1,4 @@
+target 'power' do
+    pod 'Firebase/Core'
+    pod 'Firebase/AdMob'
+end
