@@ -1,9 +1,11 @@
 import React, { PropTypes, Component } from 'react';
-import { View, ListView, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import {
+    View, ListView, StyleSheet, TouchableOpacity, Text,
+} from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { isEqual } from 'lodash';
-import Swipeout from 'react-native-swipe-out';
+import { SwipeListView, SwipeRow } from 'react-native-swipe-list-view';
 import PowerButton from '../components/PowerButton';
 import { wakeOnLan } from '../actions/wol';
 import { trashButtonPressed } from '../actions/device';
@@ -19,6 +21,9 @@ const styles = StyleSheet.create({
     deviceView: {
         display: 'flex',
         alignItems: 'center',
+        width: '100%',
+        height: 175,
+        backgroundColor: '#ecf0f1',
     },
     deviceTitle: {
         marginTop: 16,
@@ -30,39 +35,46 @@ const styles = StyleSheet.create({
         color: '#34495e',
     },
     deleteButton: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
         width: '100%',
         height: '100%',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
         backgroundColor: '#e74c3c',
+    },
+    trashIcon: {
+        width: 100,
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    separator: {
+        height: StyleSheet.hairlineWidth,
+        backgroundColor: '#bdc3c7',
     },
 });
 
 const renderRow = rowProps => (device, section, row) => {
     const { wake, trash } = rowProps;
     const index = Number(row);
-    const deleteButton = (
-        <View style={styles.deleteButton}>
-            <Icon name="trash" size={18} color="#ecf0f1" />
-        </View>
-    );
-    const rightButtons = [
-        {
-            component: deleteButton,
-            onPress: trash(index),
-        },
-    ];
     return (
-        <Swipeout right={rightButtons} backgroundColor="#ecf0f1">
-            <View style={styles.deviceView}>
+        <SwipeRow disableRightSwipe rightOpenValue={-100} stopRightSwipe={-150}>
+            <View style={styles.deleteButton}>
+                <TouchableOpacity style={styles.trashIcon} onPress={trash(index)}>
+                    <Icon name="trash" size={18} color="#ecf0f1" />
+                </TouchableOpacity>
+            </View>
+            <View style={styles.deviceView} >
                 <Text style={styles.deviceTitle}>{device.name}</Text>
                 <Text style={styles.deviceSubtitle}>{device.mac}</Text>
                 <PowerButton text="Power On" onPress={wake(device.mac)} />
             </View>
-        </Swipeout>
+        </SwipeRow>
     );
 };
+
+const renderSeparator = () => (
+    <View style={styles.separator} />
+);
 
 class Home extends Component {
     constructor() {
@@ -74,13 +86,13 @@ class Home extends Component {
 
     render() {
         const { devices, wake, trash } = this.props;
-        const rowProps = { wake, trash };
         this.dataSource = this.dataSource.cloneWithRows(devices);
         return (
-            <ListView
+            <SwipeListView
               style={styles.view}
               dataSource={this.dataSource}
-              renderRow={renderRow(rowProps)}
+              renderRow={renderRow({ wake, trash })}
+              renderSeparator={renderSeparator}
               enableEmptySections
             />
         );

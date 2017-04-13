@@ -46,11 +46,11 @@
 		B310106FEF344A1990E083E8 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C5232CD3C10C4288A96D13CA /* Zocial.ttf */; };
 		B3EA13799A8B4CDFAB8F30AA /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F3DD51E2678846A6A290E344 /* libRNVectorIcons.a */; };
 		B99E48178D0140B2970FE36E /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3D11353A33434136BDE16B07 /* Foundation.ttf */; };
+		D6AF48F5C61B4563BE74FF5C /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696CC1F015C43E995FFBFA7 /* libUdpSockets.a */; };
 		D7626349705047179B30AD5B /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2772E6658DBC4839B5B3B5EC /* FontAwesome.ttf */; };
 		E65F2DF46FE34134B1A46075 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E6D1FDD0378477FA0A9D4B7 /* libRNAdMobManager.a */; };
 		F2620954EE07764889E8A5CF /* libPods-power.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6829277972230EA2CDB8367E /* libPods-power.a */; };
 		F363D277A25344728329EB44 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37F645893EEC40868156A2C4 /* Ionicons.ttf */; };
-		D6AF48F5C61B4563BE74FF5C /* libUdpSockets.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3696CC1F015C43E995FFBFA7 /* libUdpSockets.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -271,6 +271,13 @@
 			remoteGlobalIDString = A96DA7741C146D7200FC639B;
 			remoteInfo = RNAdMobManager;
 		};
+		D2E493711E9FBFDD0043454D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7ED17CE2786451CB4A96EBC /* UdpSockets.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = UdpSockets;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -300,6 +307,7 @@
 		2D02E4901E0B4A5D006451C7 /* power-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "power-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DE7431594B0466693A3271B /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		2E6D1FDD0378477FA0A9D4B7 /* libRNAdMobManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAdMobManager.a; sourceTree = "<group>"; };
+		3696CC1F015C43E995FFBFA7 /* libUdpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libUdpSockets.a; sourceTree = "<group>"; };
 		37F645893EEC40868156A2C4 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		3D11353A33434136BDE16B07 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		4827BF1CD13944EB8616CDC1 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
@@ -317,9 +325,8 @@
 		D4BF9699DBC24C6CB89AFCE2 /* Pacifico.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Pacifico.ttf; path = ../assets/fonts/Pacifico.ttf; sourceTree = "<group>"; };
 		DB8A80F2F4B34D00AE93BA76 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		F3DD51E2678846A6A290E344 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		F7ED17CE2786451CB4A96EBC /* UdpSockets.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = UdpSockets.xcodeproj; path = "../node_modules/react-native-udp/ios/UdpSockets.xcodeproj"; sourceTree = "<group>"; };
 		FB59E903BD7C46BD8026768B /* libInAppUtils.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libInAppUtils.a; sourceTree = "<group>"; };
-		F7ED17CE2786451CB4A96EBC /* UdpSockets.xcodeproj */ = {isa = PBXFileReference; name = "UdpSockets.xcodeproj"; path = "../node_modules/react-native-udp/ios/UdpSockets.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		3696CC1F015C43E995FFBFA7 /* libUdpSockets.a */ = {isa = PBXFileReference; name = "libUdpSockets.a"; path = "libUdpSockets.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -593,6 +600,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D2E493511E9FBFDD0043454D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2E493721E9FBFDD0043454D /* libUdpSockets.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E9AA7D1E737E4BCEA135C31D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -793,6 +808,10 @@
 				{
 					ProductGroup = D2E3962B1E9D8A5100AAADBB /* Products */;
 					ProjectRef = 2DE7431594B0466693A3271B /* RNVectorIcons.xcodeproj */;
+				},
+				{
+					ProductGroup = D2E493511E9FBFDD0043454D /* Products */;
+					ProjectRef = F7ED17CE2786451CB4A96EBC /* UdpSockets.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -1007,6 +1026,13 @@
 			fileType = archive.ar;
 			path = libRNAdMobManager.a;
 			remoteRef = D2E396331E9D8A5100AAADBB /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		D2E493721E9FBFDD0043454D /* libUdpSockets.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUdpSockets.a;
+			remoteRef = D2E493711E9FBFDD0043454D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
