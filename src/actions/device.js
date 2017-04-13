@@ -17,7 +17,7 @@ export const nameTextChanged = text => dispatch => (
 export const DONE_BUTTON_PRESSED = 'DONE_BUTTON_PRESSED';
 export const doneButtonPressed = (dispatch, getState) => {
     const state = getState();
-    return dispatch({
+    dispatch({
         type: DONE_BUTTON_PRESSED,
         device: {
             name: state.app.nameText,

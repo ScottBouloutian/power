@@ -1,30 +1,46 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
-import { macTextChanged, nameTextChanged, doneButtonPressed } from '../actions/device';
+import { View, Text, TextInput, StyleSheet } from 'react-native';
+import { macTextChanged, nameTextChanged } from '../actions/device';
+import DeviceHeader from './DeviceHeader';
 
 const styles = StyleSheet.create({
     view: {
         display: 'flex',
-    },
-    label: {
-        margin: 16,
-        textAlign: 'center',
     },
     input: {
         textAlign: 'center',
         height: 40,
         backgroundColor: 'white',
     },
+    label: {
+        width: '100%',
+        height: 48,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    dot: {
+        width: 8,
+        height: 8,
+        margin: 8,
+        borderRadius: 4,
+    },
 });
 
 function Device(props) {
     const {
-        macText, nameText, macChanged, nameChanged, buttonDisabled, donePressed
+        nameText, macText, nameValid, macValid, macChanged, nameChanged,
     } = props;
+    const validStyle = valid => ({
+        backgroundColor: valid ? '#2ecc71' : '#e74c3c',
+    });
     return (
         <View style={styles.view}>
-            <Text style={styles.label}>Device Name</Text>
+            <View style={styles.label}>
+                <Text>Device Name</Text>
+                <View style={[styles.dot, validStyle(nameValid)]} />
+            </View>
             <TextInput
               style={styles.input}
               placeholder="My Device"
@@ -32,7 +48,10 @@ function Device(props) {
               value={nameText}
               onChangeText={nameChanged}
             />
-            <Text style={styles.label}>Media Access Control Address (MAC Address)</Text>
+            <View style={styles.label}>
+                <Text>Media Access Control Address (MAC Address)</Text>
+                <View style={[styles.dot, validStyle(macValid)]} />
+            </View>
             <TextInput
               style={styles.input}
               placeholder="00:00:00:00:00:00"
@@ -41,40 +60,38 @@ function Device(props) {
               maxLength={17}
               onChangeText={macChanged}
             />
-            <Button title="Done" disabled={buttonDisabled} onPress={donePressed} />
         </View>
     );
 }
 
 Device.navigationOptions = {
     title: 'Add Device',
+    header: navigation => ({
+        right: (
+            <DeviceHeader navigation={navigation} />
+        ),
+    }),
 };
 
 Device.propTypes = {
-    macText: PropTypes.string.isRequired,
     nameText: PropTypes.string.isRequired,
+    macText: PropTypes.string.isRequired,
+    nameValid: PropTypes.bool.isRequired,
+    macValid: PropTypes.bool.isRequired,
     macChanged: PropTypes.func.isRequired,
     nameChanged: PropTypes.func.isRequired,
-    buttonDisabled: PropTypes.bool.isRequired,
-    donePressed: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-    macText: state.app.macText,
     nameText: state.app.nameText,
-    buttonDisabled: !state.app.nameValid || !state.app.macValid,
+    macText: state.app.macText,
+    nameValid: state.app.nameValid,
+    macValid: state.app.macValid,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    const { navigation } = ownProps;
-    return {
-        macChanged: text => dispatch(macTextChanged(text)),
-        nameChanged: text => dispatch(nameTextChanged(text)),
-        donePressed: () => {
-            dispatch(doneButtonPressed);
-            dispatch(navigation.goBack());
-        },
-    };
-};
+const mapDispatchToProps = dispatch => ({
+    macChanged: text => dispatch(macTextChanged(text)),
+    nameChanged: text => dispatch(nameTextChanged(text)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Device);

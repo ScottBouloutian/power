@@ -10,8 +10,7 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "eslint **/*.js",
-    "test": "jest"
+    "lint": "eslint **/*.js"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
