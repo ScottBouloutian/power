@@ -25,3 +25,11 @@ export const doneButtonPressed = (dispatch, getState) => {
         },
     });
 };
+
+export const TRASH_BUTTON_PRESSED = 'TRASH_BUTTON_PRESSED';
+export const trashButtonPressed = index => dispatch => (
+    dispatch({
+        type: TRASH_BUTTON_PRESSED,
+        index,
+    })
+);

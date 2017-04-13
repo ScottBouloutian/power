@@ -20,6 +20,7 @@
     "react-native": "0.43.3",
     "react-native-admob": "^1.2.1",
     "react-native-in-app-utils": "^5.2.3",
+    "react-native-swipe-out": "^2.0.14",
     "react-native-udp": "^2.0.0",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "react-community/react-navigation",

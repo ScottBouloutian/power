@@ -62,7 +62,7 @@ Device.propTypes = {
 const mapStateToProps = state => ({
     macText: state.app.macText,
     nameText: state.app.nameText,
-    buttonDisabled: !state.app.macValid,
+    buttonDisabled: !state.app.nameValid || !state.app.macValid,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => {
