@@ -11,10 +11,7 @@ const styles = StyleSheet.create({
         width: 150,
         paddingTop: 10,
         paddingBottom: 10,
-        marginTop: 0,
-        marginRight: 10,
-        marginBottom: 10,
-        marginLeft: 0,
+        margin: 16,
         borderRadius: 10,
         backgroundColor: '#e74c3c',
         borderBottomWidth: 6,
@@ -46,7 +43,7 @@ class PowerButton extends Component {
     }
 
     render() {
-        const { text } = this.props;
+        const { text, onPress } = this.props;
         const { translateY } = this.state;
         const negativeTranslation = Animated.multiply(-1, translateY);
         const translationStyle = {
@@ -68,7 +65,7 @@ class PowerButton extends Component {
             }).start();
         };
         return (
-            <TouchableWithoutFeedback onPressIn={pressIn} onPressOut={pressOut}>
+            <TouchableWithoutFeedback onPressIn={pressIn} onPressOut={pressOut} onPress={onPress}>
                 <Animated.View style={[styles.button, translationStyle]}>
                     <Text style={styles.buttonText}>{text}</Text>
                 </Animated.View>
@@ -79,6 +76,7 @@ class PowerButton extends Component {
 
 PowerButton.propTypes = {
     text: PropTypes.string.isRequired,
+    onPress: PropTypes.func.isRequired,
 };
 
 export default PowerButton;

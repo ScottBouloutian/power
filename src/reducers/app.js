@@ -1,10 +1,11 @@
 import { assign } from 'lodash';
-import { MAC_TEXT_CHANGED, ADD_BUTTON_PRESSED } from '../actions/add';
+import { MAC_TEXT_CHANGED, NAME_TEXT_CHANGED, DONE_BUTTON_PRESSED } from '../actions/device';
 
 const defaultState = {
     appState: null,
     launching: false,
     macText: '',
+    nameText: '',
     macValid: false,
     devices: [],
 };
@@ -15,6 +16,7 @@ export default function (state = defaultState, action) {
         (state.appState === 'inactive' || state.appState === 'background') &&
         action.appState === 'active'
     );
+    const devices = (action.device) ? state.devices.concat(action.device) : [];
     switch (action.type) {
     case 'APP_STATE_CHANGE':
         return assign({ }, state, {
@@ -26,13 +28,17 @@ export default function (state = defaultState, action) {
             macText: action.text,
             macValid: macRegex.test(action.text),
         });
-    case ADD_BUTTON_PRESSED:
+    case NAME_TEXT_CHANGED:
+        return assign({ }, state, {
+            nameText: action.text,
+        });
+    case DONE_BUTTON_PRESSED:
         return assign({ }, state, {
             macText: '',
             macValid: false,
-            devices: state.devices.concat(action.device),
+            devices,
         });
     default:
-        return assign({ }, state);
+        return state;
     }
 }

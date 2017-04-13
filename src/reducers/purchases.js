@@ -60,6 +60,6 @@ export default (state = defaultState, action) => {
             error: null,
         });
     default:
-        return assign({ }, state);
+        return state;
     }
 };

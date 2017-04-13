@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "lint": "eslint **/*.js",
     "test": "jest"
   },
   "dependencies": {
@@ -19,11 +20,13 @@
     "react-native": "0.43.3",
     "react-native-admob": "^1.2.1",
     "react-native-in-app-utils": "^5.2.3",
+    "react-native-udp": "^2.0.0",
     "react-native-vector-icons": "^4.0.1",
     "react-navigation": "react-community/react-navigation",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-logger": "^3.0.1",
+    "redux-persist": "^4.6.0",
     "redux-promise-middleware": "^4.2.0",
     "redux-thunk": "^2.2.0"
   },
@@ -43,6 +46,8 @@
     "preset": "react-native"
   },
   "rnpm": {
-      "assets": ["./assets/fonts"]
+    "assets": [
+      "./assets/fonts"
+    ]
   }
 }

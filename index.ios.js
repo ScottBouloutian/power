@@ -17,12 +17,13 @@
  */
 
 import React, { Component } from 'react';
-import { AppRegistry, AppState } from 'react-native';
+import { AppRegistry, AppState, AsyncStorage } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
 import reduxPromiseMiddleware from 'redux-promise-middleware';
+import { persistStore, autoRehydrate } from 'redux-persist';
 import reducer from './src/reducers';
 import Application from './src/containers/Application';
 
@@ -37,7 +38,16 @@ const middlewares = [
 if (development) {
     middlewares.push(logger);
 }
-const store = compose(applyMiddleware(...middlewares))(createStore)(reducer);
+const store = compose(
+    applyMiddleware(...middlewares),
+    autoRehydrate({ log: development }),
+)(createStore)(reducer);
+
+// Persist the redux store
+persistStore(store, {
+    storage: AsyncStorage,
+    whitelist: ['app'],
+});
 
 // Create the main app component
 class Power extends Component {
