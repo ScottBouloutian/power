@@ -16,7 +16,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { PropTypes } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
 import { View, StyleSheet } from 'react-native';
@@ -32,21 +32,29 @@ const styles = StyleSheet.create({
     },
 });
 
-function Application({ navigation, load, showAds }) {
-    const ads = showAds ? <AdMob /> : null;
-    return (
-        <View style={styles.view} onLayout={load}>
-            <Navigator navigation={navigation} />
-            { ads }
-        </View>
-    );
+class Application extends Component {
+    componentDidMount() {
+        const { loadPurchases } = this.props;
+        loadPurchases();
+    }
+
+    render() {
+        const { navigation, showAds } = this.props;
+        const ads = showAds ? <AdMob /> : null;
+        return (
+            <View style={styles.view}>
+                <Navigator navigation={navigation} />
+                { ads }
+            </View>
+        );
+    }
 }
 
 Application.propTypes = {
     navigation: PropTypes.shape({
         navigate: PropTypes.func,
     }).isRequired,
-    load: PropTypes.func.isRequired,
+    loadPurchases: PropTypes.func.isRequired,
     showAds: PropTypes.bool.isRequired,
 };
 
@@ -54,12 +62,12 @@ const mapStateToProps = (state) => {
     const { navigation, purchases } = state;
     return {
         navigation,
-        showAds: purchases.loaded && !purchases.removeAds,
+        showAds: !purchases.removeAds,
     };
 };
 
 const mapDispatchToProps = dispatch => ({
-    load: () => dispatch(restorePurchases).catch(() => {}),
+    loadPurchases: () => dispatch(restorePurchases).catch(() => {}),
     dispatch,
 });
 

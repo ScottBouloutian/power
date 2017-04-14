@@ -30,14 +30,19 @@ import { trashButtonPressed } from '../actions/device';
 
 const styles = StyleSheet.create({
     view: {
-        flex: 1,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#ecf0f1',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    listView: {
         backgroundColor: '#ecf0f1',
     },
     headerButton: {
         margin: 16,
     },
     deviceView: {
-        display: 'flex',
         alignItems: 'center',
         width: '100%',
         height: 175,
@@ -68,6 +73,12 @@ const styles = StyleSheet.create({
     separator: {
         height: StyleSheet.hairlineWidth,
         backgroundColor: '#bdc3c7',
+    },
+    welcomeText: {
+        width: 200,
+        color: '#c0392b',
+        fontSize: 18,
+        textAlign: 'center',
     },
 });
 
@@ -105,26 +116,39 @@ class Home extends Component {
     render() {
         const { devices, wake, trash } = this.props;
         this.dataSource = this.dataSource.cloneWithRows(devices);
-        return (
+        const getStarted = (
+            <View style={styles.view}>
+                <Text style={styles.welcomeText}>
+                    Touch the + in the top right corner to add a device!
+                </Text>
+            </View>
+        );
+        const deviceList = (
             <SwipeListView
-              style={styles.view}
+              style={styles.listView}
               dataSource={this.dataSource}
               renderRow={renderRow({ wake, trash })}
               renderSeparator={renderSeparator}
               enableEmptySections
             />
         );
+        return (devices.length === 0) ? getStarted : deviceList;
     }
 }
 
 Home.navigationOptions = {
-    title: 'Power',
     header: ({ navigate }) => {
+        const navigateInfoPage = () => navigate('Info');
         const navigateAddPage = () => navigate('Device');
         return {
+            left: (
+                <TouchableOpacity style={styles.headerButton} onPress={navigateInfoPage}>
+                    <Icon name="info" size={18} color="#c0392b" />
+                </TouchableOpacity>
+            ),
             right: (
                 <TouchableOpacity style={styles.headerButton} onPress={navigateAddPage}>
-                    <Icon name="plus" size={18} />
+                    <Icon name="plus" size={18} color="#c0392b" />
                 </TouchableOpacity>
             ),
         };

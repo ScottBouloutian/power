@@ -24,7 +24,6 @@ import {
 const defaultState = {
     products: [],
     removeAds: false,
-    loaded: false,
     error: null,
 };
 
@@ -65,9 +64,7 @@ export default (state = defaultState, action) => {
             const id = purchase.productIdentifier;
             updates[mapId(id)] = true;
         });
-        return assign({ }, state, updates, {
-            loaded: true,
-        });
+        return assign({ }, state, updates);
     case `${RESTORE_PURCHASES}_REJECTED`:
         return assign({ }, state, {
             error: action.payload,

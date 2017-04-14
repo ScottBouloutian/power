@@ -85,6 +85,7 @@ function Device(props) {
 Device.navigationOptions = {
     title: 'Add Device',
     header: navigation => ({
+        tintColor: '#c0392b',
         right: (
             <DeviceHeader navigation={navigation} />
         ),

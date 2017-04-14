@@ -30,9 +30,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#ecf0f1',
     },
-    header: {
-        backgroundColor: '#e74c3c',
-    },
     profile: {
         width: 100,
         height: 100,
@@ -90,8 +87,7 @@ Info.propTypes = {
 Info.navigationOptions = {
     title: 'Information',
     header: {
-        tintColor: '#ecf0f1',
-        style: styles.header,
+        tintColor: '#c0392b',
     },
 };
 const mapStateToProps = state => ({

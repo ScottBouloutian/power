@@ -34,7 +34,7 @@ function DeviceHeader(props) {
         save();
         navigation.goBack();
     };
-    const color = canSave ? '#000000' : '#bdc3c7';
+    const color = canSave ? '#c0392b' : '#bdc3c7';
     return (
         <TouchableOpacity style={styles.headerButton} disabled={!canSave} onPress={onPress}>
             <Icon name="floppy-o" size={18} color={color} />
