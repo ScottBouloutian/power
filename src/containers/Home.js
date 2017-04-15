@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#ecf0f1',
     },
     headerButton: {
-        margin: 16,
+        padding: 16,
     },
     deviceView: {
         alignItems: 'center',
