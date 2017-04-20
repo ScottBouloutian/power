@@ -10,7 +10,9 @@
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "eslint **/*.js && jest --coverage"
+    "lint": "eslint **/*.js",
+    "test": "jest",
+    "coverage": "jest --coverage && cat coverage/lcov.info | coveralls"
   },
   "dependencies": {
     "bluebird": "^3.5.0",
@@ -33,6 +35,7 @@
   "devDependencies": {
     "babel-jest": "19.0.0",
     "babel-preset-react-native": "1.9.1",
+    "coveralls": "^2.13.0",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
