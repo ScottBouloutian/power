@@ -4,8 +4,12 @@
         "react",
         "react-native",
         "jsx-a11y",
-        "import"
+        "import",
+        "jest"
     ],
+    "env": {
+        "jest/globals": true
+    },
     "rules": {
         "indent": ["error", 4],
         "react/jsx-indent": ["error", 4],
